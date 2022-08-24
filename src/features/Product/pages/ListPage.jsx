@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Pagination, Paper } from '@mui/material';
 import queryString from 'query-string';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import productApi from '../../../api/productApi';
 import FilterViewer from '../components/Filters/FilterViewer';
@@ -32,13 +32,13 @@ function ListPage(props) {
   });
   const [loading, setLoading] = useState(true);
 
+  //Call API nè
   useEffect(() => {
     (async () => {
       try {
         const { data, pagination } = await productApi.getAll(queryParams);
         setProductList(data);
         setPagination(pagination);
-        console.log({ data, pagination });
       } catch (error) {
         console.log('Failed to fetch product list:', error);
       }
@@ -88,9 +88,9 @@ function ListPage(props) {
   return (
     <Box>
       <Container>
-        <Grid container spacing={1}>
-          <Grid item sx={{ width: '250px' }}>
-            <Paper elevation={0}>
+        <Grid container spacing={2}>
+          <Grid item sx={{ width: '280px' }}>
+            <Paper elevation={0} variant="outlined" square sx={{ height: '100%' }}>
               <ProductFilter filters={queryParams} onChange={handleFiltersChange} />
             </Paper>
           </Grid>
@@ -100,7 +100,7 @@ function ListPage(props) {
               <ProductSort currentSort={queryParams._sort} onChange={handleSortChange} />
               <FilterViewer filters={queryParams} onChange={setNewFilters} />
 
-              {loading ? <ProductSkeletonList length={9} /> : <ProductList data={productList} />}
+              {loading ? <ProductSkeletonList /> : <ProductList data={productList} />}
 
               <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, pb: 3 }} y>
                 <Pagination

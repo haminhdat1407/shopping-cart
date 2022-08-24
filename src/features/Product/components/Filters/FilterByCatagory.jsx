@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import categoryApi from '../../../../api/categoryApi';
+import './style.scss';
 
 FilterByCatagory.propTypes = {
   onChange: PropTypes.func,
@@ -9,6 +10,7 @@ FilterByCatagory.propTypes = {
 
 function FilterByCatagory({ onChange }) {
   const [categoryList, setCategory] = useState([]);
+  const [activeId, setActiveId] = useState();
   useEffect(() => {
     (async () => {
       try {
@@ -28,6 +30,7 @@ function FilterByCatagory({ onChange }) {
   const handleCategoryOnClick = (category) => {
     if (onChange) {
       onChange(category.id);
+      setActiveId(category.id);
     }
   };
   return (
@@ -55,8 +58,12 @@ function FilterByCatagory({ onChange }) {
           alignItems: 'baseline',
         }}
       >
-        {categoryList.map((category) => (
-          <li key={category.id} onClick={() => handleCategoryOnClick(category)}>
+        {categoryList.map((category, index) => (
+          <li
+            className={activeId === category.id ? 'active' : ''}
+            key={category.id}
+            onClick={() => handleCategoryOnClick(category, index)}
+          >
             {category.name}
           </li>
         ))}

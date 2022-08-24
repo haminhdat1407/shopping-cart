@@ -1,0 +1,14 @@
+.tab__link {
+  text-decoration: none !important;
+  color: #000;
+  font-size: 20px;
+}
+.active {
+  color: rgb(13, 14, 85) !important;
+  text-decoration: underline !important;
+}
+.details-block {
+  & > h4 {
+    font-size: 40px;
+  }
+}

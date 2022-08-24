@@ -56,9 +56,11 @@ function FilterByPrices({ onChange }) {
         />
       </Box>
 
-      <Button variant="outlined" color="primary" onClick={handleSubmit}>
-        Áp dụng
-      </Button>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Button variant="outlined" color="primary" onClick={handleSubmit}>
+          Áp dụng
+        </Button>
+      </Box>
     </Box>
   );
 }
